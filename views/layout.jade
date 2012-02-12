@@ -1,0 +1,36 @@
+!!! 5
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='/javascripts/modernizr.custom.81317.js')
+	body
+		.topbar
+			.fill
+				.container
+					a(href='/').brand ArdMostat
+					ul.nav
+						li 
+							a(href='/Temperature') Temperature
+						li
+							a(href='/Schedule') Schedule
+
+		.container
+			.content
+				.pageheader
+					h1=title
+				.row
+					.span10!= body
+					.span4
+						p stuff?
+			footer
+				p cheers
+
+	script(src='/javascripts/jquery-1.7.1.min.js')
+	- if (typeof(pagescript) != 'undefined' && typeof(pagescript) === 'string')
+		script(src=pagescript)
+	- else if (typeof(pagescript) != 'undefined')
+		- for (var i=0; i < pagescript.length; i++)
+			script(src=pagescript[i])
+
