@@ -29,6 +29,14 @@ app.configure('development', function(){
 
 app.configure('production', function(){
 	app.use(express.errorHandler()); 
+	app.get('*',function(req,res,next){
+	  if(req.headers['x-forwarded-proto']!='https')
+		console.log(req);
+		next();
+		//res.redirect('https://mypreferreddomain.com'+req.url)
+	  else
+		next() /* Continue to other routes if we're not redirecting */
+	});
 });
 
 // Routes
