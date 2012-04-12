@@ -41,9 +41,12 @@ app.configure('production', function(){
 // Routes
 var mainRoutes = require('./routes/')
 ,  tempRoutes = require('./routes/temperature')
+,  arduinoRoutes = require('./routes/arduino')
 	
 mainRoutes.init(app);
 tempRoutes.init(app);
+arduinoRoutes.init(app, {});
+
 
 
 var port = process.env.PORT || 3000;
