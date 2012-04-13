@@ -38,6 +38,9 @@ exports.init = function (app, temperatures) {
 	app.get('/RecentTemperatures', ajaxRequired, gzippo.compress(), function (req, res) {
 		res.json(temperatures.get());
 	});
+	app.get('/CurrentTemperature', ajaxRequired, function (req, res) {
+		res.send(temperatures.getLast().toString());
+	});
 
 
 	app.get('/Temperature/Range/:start/:stop', ajaxRequired, gzippo.compress(), function(req, res) {

@@ -25,9 +25,11 @@ html
 			.row
 				.span10!= body
 				.span2
-					p stuff?
+					p Current temperature: 
+						span#currentTemperature
 
 	script(src='/javascripts/jquery-1.7.1.min.js')
+	script(src='/javascripts/site.js')
 	- if (typeof(pagescript) != 'undefined' && typeof(pagescript) === 'string')
 		script(src=pagescript)
 	- else if (typeof(pagescript) != 'undefined')

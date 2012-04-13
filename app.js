@@ -47,7 +47,8 @@ var recentTemperatures = {
 		}
 		this.temps.push([new Date(), newTemp]);
 	},
-	get: function() { return this.temps; }
+	get: function() { return this.temps; },
+	getLast: function() { var lastTemp =  this.temps[this.temps.length - 1]; if (lastTemp) return lastTemp[1]; else return "unkown"; }
 };
 
 

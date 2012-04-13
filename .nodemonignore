@@ -1,0 +1,5 @@
+/vendor/*     
+/public/*    
+*.css       
+*.swp
+*.jade
