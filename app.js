@@ -45,7 +45,7 @@ var mainRoutes = require('./routes/')
 	
 mainRoutes.init(app);
 tempRoutes.init(app);
-arduinoRoutes.init(app, {});
+arduinoRoutes.init(app, express.bodyParser, {});
 
 
 
