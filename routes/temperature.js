@@ -17,13 +17,7 @@ var db = orm.connect(connectionString, function( success, db) {
 var pg = require('pg');
 
 
-exports.init = function (app) {
-	app.get('/Temperature', function(req, res) {
-		res.render('temperature', { 
-			title: 'Temperature information', 
-			pagescript: ['/javascripts/temperature.js', '/javascripts/dygraph-combined.js']
-		});
-	});
+exports.init = function (app, temperatures) {
 
 	function ajaxRequired(req, res, next) {
 		if (req.xhr) {
@@ -33,6 +27,18 @@ exports.init = function (app) {
 			res.send('This method is only intended for ajax calls', 500);
 		}
 	}
+
+	app.get('/Temperature', function(req, res) {
+		res.render('temperature', { 
+			title: 'Temperature information', 
+			pagescript: ['/javascripts/temperature.js', '/javascripts/dygraph-combined.js']
+		});
+	});
+
+	app.get('/RecentTemperatures', ajaxRequired, gzippo.compress(), function (req, res) {
+		res.json(temperatures.get());
+	});
+
 
 	app.get('/Temperature/Range/:start/:stop', ajaxRequired, gzippo.compress(), function(req, res) {
 		if (typeof(Temp) == 'undefined') {

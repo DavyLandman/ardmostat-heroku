@@ -45,7 +45,7 @@ var recentTemperatures = {
 		if (this.temps.length >= 20) {
 			this.temps = temps.slice(this.temps.length-19) 
 		}
-		this.temps.push(newTemp);
+		this.temps.push([new Date(), newTemp]);
 	},
 	get: function() { return this.temps; }
 };
