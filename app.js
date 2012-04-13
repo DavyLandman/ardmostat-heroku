@@ -38,14 +38,28 @@ app.configure('production', function(){
 	});
 });
 
+
+var recentTemperatures = {
+	temps: [],
+	send: function(newTemp) {
+		if (this.temps.length >= 20) {
+			this.temps = temps.slice(this.temps.length-19) 
+		}
+		this.temps.push(newTemp);
+	},
+	get: function() { return this.temps; }
+};
+
+
 // Routes
 var mainRoutes = require('./routes/')
 ,  tempRoutes = require('./routes/temperature')
 ,  arduinoRoutes = require('./routes/arduino')
 	
+
 mainRoutes.init(app);
-tempRoutes.init(app);
-arduinoRoutes.init(app, express.bodyParser, {});
+tempRoutes.init(app, recentTemperatures);
+arduinoRoutes.init(app, express.bodyParser, recentTemperatures);
 
 
 

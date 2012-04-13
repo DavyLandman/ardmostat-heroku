@@ -6,19 +6,26 @@ exports.init = function (app, bodyParser, temperatureCache) {
 	var lastNonce = -1;
 	app.put("/temperature", function (req, res) {
 		var body = req.body;		
-		console.log(body);
-		var contents = enc.decrypt(body, config.key);
-		var temperature = contents.getTemperature();
-		var nonce = contents.getNonce();
-		if (nonce <= lastNonce) {
-			console.log("Invalid Nonce received");	
-			res.send("Error", 500);
-			return;
+		if (body.length == 16) {
+			var data = new Buffer(body.toString('binary') + 'paddingbug', 'binary');
+			var decrypter = crypto.createDecipheriv('AES-128-ECB', config.key, '');
+			var result = new Buffer(decrypter.update(data)); // first block is all we need
+			var temperature = result.readUInt8(0) + (result.readUInt8(1) / 100);
+			var nonce = result.readUInt32LE(11);
+			if (nonce <= lastNonce) {
+				console.log("Invalid Nonce received");	
+				res.send("Error", 500);
+				return;
+			}
+			lastNonce = nonce;
+			temperatureCache.send(temperature);
+			//temperatureLogger.send(temperature);
+			res.send("1");
 		}
-		lastNonce = nonce;
-		temperatureCache.send(temperature);
-		temperatureLogger.send(temperature);
-		res.send("1");
+		else {
+			console.log("Invalid packet length");	
+			res.send("Error", 500);
+		}
 	});
 
 	bodyParser.parse["application/octet-stream"] = function (req, options, fn) {
