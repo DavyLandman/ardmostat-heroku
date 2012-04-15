@@ -1,5 +1,5 @@
-var config = require('config')
-,   temperatureLogger = require('temperature_logger')
+var config = require('../config')
+,   temperatureLogger = require('../temperature_logger')
 ,   crypto = require('crypto')
 
 exports.init = function (app, bodyParser, temperatureCache) {
