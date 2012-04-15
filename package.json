@@ -2,10 +2,12 @@
     "name": "ardmostat-heroku"
   , "version": "0.0.1"
   , "private": true
-  , "dependencies": {
+  , "engines": {
 	  "node" : "0.6.x"
 	, "npm"  : "1.0.x"
-    , "express": "2.5.2"
+  }
+  , "dependencies": {
+      "express": "2.5.2"
     , "stylus": ">= 0.0.1"
     , "jade": ">= 0.0.1"
 	, "gzippo": ">= 0.1.0"
