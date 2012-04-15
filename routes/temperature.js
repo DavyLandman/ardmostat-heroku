@@ -1,4 +1,5 @@
 var orm = require('orm');
+var rcon = require('utils/rcon');
 var gzippo = require('gzippo');
 var connectionString = 'postgresql://node_temp:report@localhost/Thermostat';
 var Temp;
@@ -19,15 +20,6 @@ var pg = require('pg');
 
 exports.init = function (app, temperatures) {
 
-	function ajaxRequired(req, res, next) {
-		if (req.xhr) {
-			next();
-		}
-		else {
-			res.send('This method is only intended for ajax calls', 500);
-		}
-	}
-
 	app.get('/Temperature', function(req, res) {
 		res.render('temperature', { 
 			title: 'Temperature information', 
@@ -35,15 +27,15 @@ exports.init = function (app, temperatures) {
 		});
 	});
 
-	app.get('/RecentTemperatures', ajaxRequired, gzippo.compress(), function (req, res) {
+	app.get('/RecentTemperatures', rcon.ajaxRequired, gzippo.compress(), function (req, res) {
 		res.json(temperatures.get());
 	});
-	app.get('/CurrentTemperature', ajaxRequired, function (req, res) {
+	app.get('/CurrentTemperature', rcon.ajaxRequired, function (req, res) {
 		res.send(temperatures.getLast().toString());
 	});
 
 
-	app.get('/Temperature/Range/:start/:stop', ajaxRequired, gzippo.compress(), function(req, res) {
+	app.get('/Temperature/Range/:start/:stop', rcon.ajaxRequired, gzippo.compress(), function(req, res) {
 		if (typeof(Temp) == 'undefined') {
 			console.log("Temp orm object is not defined yet?");
 			res.send("Error with database connection", 500);
