@@ -1,5 +1,5 @@
 var orm = require('orm');
-var rcon = require('utils/rcon');
+var rcon = require('./utils/rcon');
 var gzippo = require('gzippo');
 var connectionString = 'postgresql://node_temp:report@localhost/Thermostat';
 var Temp;
