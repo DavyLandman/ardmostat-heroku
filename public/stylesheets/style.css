@@ -34,10 +34,29 @@ body {
   right: 1%;
   top: 40%;
 }
+.pageheader #recentTemperatures {
+  margin-left: 2.2em;
+}
 .pageheader #currentTemperature {
   font-size: 90%;
   line-height: 120%;
   vertical-align: top;
+}
+.pageheader #minTemperature {
+  position: absolute;
+  bottom: -0.5em;
+  left: 0.1em;
+  font-size: 70%;
+  text-align: right;
+  width: 2.8em;
+}
+.pageheader #maxTemperature {
+  position: absolute;
+  top: -0.8em;
+  left: 0.1em;
+  font-size: 70%;
+  text-align: right;
+  width: 2.8em;
 }
 .content .span4 {
   margin-left: 0;
