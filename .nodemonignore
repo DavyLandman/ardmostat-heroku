@@ -3,3 +3,4 @@
 *.css       
 *.swp
 *.jade
+.git/*
