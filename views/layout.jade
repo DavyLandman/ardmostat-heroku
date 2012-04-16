@@ -22,11 +22,12 @@ html
 			.row
 				.span12.pageheader
 					h1=title
+					.right
+						span#recentTemperatures
+						span#currentTemperature
 			.row
 				.span10!= body
 				.span2
-					p Current temperature: 
-						span#currentTemperature
 
 	script(src='/javascripts/jquery-1.7.1.min.js')
 	script(src='/javascripts/jquery.sparkline.min.js')
