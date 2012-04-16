@@ -9,8 +9,7 @@ exports.init = function (app, bodyParser, temperatureCache) {
 		if (body.length == 16) {
 			var data = new Buffer(body.toString('binary') + 'paddingbug', 'binary');
 			var decrypter = crypto.createDecipheriv('AES-128-ECB', config.key, '');
-			var result = new Buffer(decrypter.update(data)); // first block is all we need
-			console.log(result);
+			var result = new Buffer(decrypter.update(data), 'binary'); // first block is all we need
 			var temperature = result.readUInt8(0) + (result.readUInt8(1) / 100);
 			var nonce = result.readUInt32LE(11);
 			if (nonce <= lastNonce) {
