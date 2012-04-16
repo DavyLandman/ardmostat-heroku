@@ -2,7 +2,7 @@ exports.recentTemperatures = {
 	temps: [],
 	send: function(newTemp) {
 		if (this.temps.length >= 20) {
-			this.temps = temps.slice(this.temps.length-19) 
+			this.temps = this.temps.slice(this.temps.length-19) 
 		}
 		this.temps.push([new Date(), newTemp]);
 	},
